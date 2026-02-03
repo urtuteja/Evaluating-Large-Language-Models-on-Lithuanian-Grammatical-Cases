@@ -4,3 +4,14 @@ This repository accompanies the paper *Evaluating Large Language Models on Lithu
 It contains the **Use_of_Cases** dataset, provided in both CSV and Excel formats. For items involving specific verbs, those verbs are listed in the `problem_source` column.
 
 In addition, the repository includes the script used for the experiments: `evaluate_pairs.py`.
+
+## Usage
+
+To run the evaluation script from the terminal, use a command like the following:
+
+```bash
+python3 evaluate_pairs.py \
+    --model <MODEL_NAME> \
+    --input Use_of_Cases.csv \
+    --output EVALUATED_Uses_of_cases.csv \
+    --token <YOUR_HF_TOKEN>
