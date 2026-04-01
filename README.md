@@ -7,9 +7,9 @@ In addition, the repository includes:
 - the script used for the experiments: `evaluate_pairs.py`;
 - a document named `Results.txt`, which contains all the results discussed in the paper.
 
-If you have questions regarding the dataset or the study in general, you can reach out via: [urte.jakubauskaite@gmail.com](mailto:urte.jakubauskaite@gmail.com) 
+If you have questions regarding the dataset or the study in general, you can reach out via: [urte.jakubauskaite@gmail.com](mailto:urte.jakubauskaite@gmail.com).
 
-**Related Study:** [TO BE ADDED]()
+**Related Study:** [TO BE ADDED]().
 
 ## Usage
 
