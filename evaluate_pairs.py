@@ -10,7 +10,7 @@ import os
 from huggingface_hub import login, whoami
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
-def sentence_nll(sentence, tokenizer, model, device, per_token=False):
+def sentence_nll(sentence, tokenizer, model, device):
     """Compute negative log-likelihood (NLL) of a sentence."""
     enc = tokenizer(sentence, return_tensors="pt")
     input_ids = enc["input_ids"].to(device)
@@ -22,10 +22,8 @@ def sentence_nll(sentence, tokenizer, model, device, per_token=False):
         outputs = model(input_ids=input_ids,
                         attention_mask=attention_mask,
                         labels=input_ids)
-
-    nll = outputs.loss.item() * (input_ids.size(1) - 1)
-    if per_token:
-        nll /= (input_ids.size(1) - 1)
+        
+    nll = outputs.loss.item()
     return nll
 
 def main():
@@ -34,7 +32,6 @@ def main():
     parser.add_argument("--output", required=True, help="Output CSV file")
     parser.add_argument("--model", required=True, help="HuggingFace model name")
     parser.add_argument("--token", required=True, help="HuggingFace token")
-    parser.add_argument("--per_token", action="store_true", help="Compute NLL per token")
     args = parser.parse_args()
 
     model_suffix = args.model.replace("/", "_")
@@ -56,13 +53,18 @@ def main():
     print(f"Using device: {device}")
 
     # Load model
-    tokenizer = AutoTokenizer.from_pretrained(args.model, use_auth_token=True)
+    tokenizer = AutoTokenizer.from_pretrained(args.model,
+                                              trust_remote_code=True,
+                                              use_auth_token=True)
     model = AutoModelForCausalLM.from_pretrained(args.model,
+                                                 trust_remote_code=True,
                                                  use_auth_token=True,
                                                  device_map="auto",
                                                  offload_folder="offload",
                                                  torch_dtype=torch.float16)
-    
+
+    model.eval()
+
     if device.type == "mps":
         torch.mps.empty_cache()
 
@@ -79,8 +81,8 @@ def main():
         correct = str(row["correct_sentence"])
         incorrect = str(row["incorrect_sentence"])
 
-        correct_nll = sentence_nll(correct, tokenizer, model, device, per_token=args.per_token)
-        incorrect_nll = sentence_nll(incorrect, tokenizer, model, device, per_token=args.per_token)
+        correct_nll = sentence_nll(correct, tokenizer, model, device)
+        incorrect_nll = sentence_nll(incorrect, tokenizer, model, device)
 
         certainty = incorrect_nll - correct_nll
         decision = "correct" if correct_nll < incorrect_nll else "incorrect"
