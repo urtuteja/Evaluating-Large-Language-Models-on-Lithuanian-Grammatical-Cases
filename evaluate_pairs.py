@@ -23,6 +23,7 @@ def sentence_nll(sentence, tokenizer, model, device):
                         attention_mask=attention_mask,
                         labels=input_ids)
         
+    # nll = outputs.loss.item() * (input_ids.size(1) - 1) <-- TOTAL NLL
     nll = outputs.loss.item() # <-- MEAN NLL
     return nll
 
