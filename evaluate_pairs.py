@@ -23,7 +23,7 @@ def sentence_nll(sentence, tokenizer, model, device):
                         attention_mask=attention_mask,
                         labels=input_ids)
         
-    nll = outputs.loss.item()
+    nll = outputs.loss.item() # <-- MEAN NLL
     return nll
 
 def main():
