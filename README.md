@@ -25,7 +25,7 @@ To run the evaluation script from the terminal, use a command like the following
 python3 evaluate_pairs.py \
     --model <MODEL_NAME> \
     --input Use_of_Cases.csv \
-    --output EVALUATED_Uses_of_cases.csv \
+    --output EVALUATED_Uses_of_Cases.csv \
     --token <YOUR_HF_TOKEN>
 ```
 
