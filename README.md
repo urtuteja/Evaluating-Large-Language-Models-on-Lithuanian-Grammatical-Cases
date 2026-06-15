@@ -9,13 +9,13 @@ In addition, the repository includes:
 
 If you have questions regarding the dataset or the study in general, you can reach out via: [urte.jakubauskaite@gmail.com](mailto:urte.jakubauskaite@gmail.com).
 
---
+---
 
 ## Related Study
 
 This study has a larger-scale extension available in the following repository: [https://github.com/urtuteja/Evaluating-The-Syntactic-Knowledge-of-Language-Models-on-Lithuanian](https://github.com/urtuteja/Evaluating-The-Syntactic-Knowledge-of-Language-Models-on-Lithuanian).
 
---
+---
 
 ## Usage
 
@@ -27,5 +27,6 @@ python3 evaluate_pairs.py \
     --input Use_of_Cases.csv \
     --output EVALUATED_Uses_of_cases.csv \
     --token <YOUR_HF_TOKEN>
+```
 
 ---
