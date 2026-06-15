@@ -1,6 +1,11 @@
 # Evaluating Large Language Models on Lithuanian Grammatical Cases
 
 This repository accompanies the paper *Evaluating Large Language Models on Lithuanian Grammatical Cases*.  
+
+Jakubauskaitė, U. & Alhama, R. G. (2026) – *Evaluating Large Language Models on Lithuanian Grammatical Cases*:  
+https://aclanthology.org/2026.loreslm-1.32/
+
+
 It contains the **Use_of_Cases** dataset, provided in both CSV and Excel formats. For items involving specific verbs, those verbs are listed in the `problem_source` column.
 
 In addition, the repository includes:
